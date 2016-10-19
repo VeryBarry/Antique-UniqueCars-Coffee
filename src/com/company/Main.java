@@ -1,37 +1,39 @@
 package com.company;
 
+import jodd.json.JsonParser;
 import jodd.json.JsonSerializer;
+import org.h2.tools.Server;
 import spark.Session;
 import spark.Spark;
-
-import javax.servlet.MultipartConfigElement;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) throws SQLException {
+        Server.createWebServer().start();
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
         createTables(conn);
-
         Spark.externalStaticFileLocation("public");
         Spark.init();
 
         Spark.post(
                 "/login",
                 (request, response) -> {
-                    String name = request.queryParams("username");
-                    User user = selectUser(conn, name);
-                    if (user == null) {
-                        insertUser(conn, name);
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    User user = parser.parse(body, User.class);
+                    User uc = selectUser(conn, user.username);
+                    if (!user.password.equals(uc.password)) {
+                        Spark.halt(403);
+                        return "";
+                    }
+                    else if (uc == null) {
+                        insertUser(conn, user.username, user.password);
                     }
                     Session session = request.session();
-                    session.attribute("username", name);
-                    response.redirect("/");
-                    return null;
+                    session.attribute("email", user.username);
+                    return "";
                 }
         );
 
@@ -59,11 +61,24 @@ public class Main {
                 }
         );
 
-        Spark.get(
-                "/images",
+        Spark.post(
+                "/add-car",
                 (request, response) -> {
-
-                    return null;
+                    Session session = request.session();
+                    String email = session.attribute("email");
+                    User user = selectUser(conn, email);
+                    String body = request.body();
+                    JsonParser parser = new JsonParser();
+                    Car car = parser.parse(body, Car.class);
+                    insertCar(conn, car, user.id);
+                    return "";
+                }
+        );
+        Spark.get(
+                "/car",
+                (request, response) -> {
+                    JsonSerializer serializer = new JsonSerializer();
+                    return serializer.serialize(selectCars(conn));
                 }
         );
     }
@@ -78,17 +93,18 @@ public class Main {
         stmt.setString(2, password);
         stmt.execute();
     }
-    public static User selectUser(Connection conn, String username, String password) throws SQLException {
+    public static User selectUser(Connection conn, String username) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
         stmt.setString(1, username);
         ResultSet results = stmt.executeQuery();
         if (results.next()) {
             int id = results.getInt("id");
+            String password = results.getString("password");
             return new User(id, username, password);
         }
         return null;
     }
-    static int insertCar(Connection conn, Car car, int userId) throws SQLException {
+    public static void insertCar(Connection conn, Car car, int userId) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO cars VALUES (NULL, ?, ?, ?, ?, ?)");
         stmt.setString(1, car.make);
         stmt.setString(2, car.model);
@@ -97,7 +113,7 @@ public class Main {
         stmt.setInt(5, userId);
         stmt.execute();
     }
-    static ArrayList<Car> selectCars(Connection conn) throws SQLException {
+    public static ArrayList<Car> selectCars(Connection conn) throws SQLException {
         ArrayList<Car> cars = new ArrayList<>();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM cars INNER JOIN users ON cars.user_id = users.id");
         ResultSet results = stmt.executeQuery();
