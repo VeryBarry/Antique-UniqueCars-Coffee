@@ -8,20 +8,52 @@ img {
 
 #app-container{
 }
-<<<<<<< HEAD
+// <<<<<<< HEAD
 
-.jumbotron h1 {
+.jumbotron {
+  h1 {
   text-align: center;
   font-size: 72px;
   font-weight: 900;
   font-family: fantasy, serif;
+  }
+  h3 {
+    text-align: center;
+    font-size: 40px;
+    font-family: "Helvetica", serif
+  }
 }
 .main-header {
-  background: #ff0084; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #ff0084 , #33001b); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #ff0084 , #33001b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #C02425; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #C02425 , #F0CB35); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #C02425 , #F0CB35); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: 400px;
   padding-top: 50px;
+  margin-bottom: 0;
 }
-=======
->>>>>>> 58cf54cc6b3c1dc7be7f6adf80c905f4ee4ec142
+.container {
+  // background: #9b59b6;
+  margin-right: 0;
+  width: 100%;
+}
+.input-container {
+  height: 325px;
+  // width: 100%;
+  background: #bdc3c7;
+  margin-right: 0;
+}
+.input-box {
+  // padding-left: 40px;
+  width: 400px;
+  margin: 20px auto 0;
+  h3 {
+    text-align: center;
+  }
+
+
+}
+// .name-input {
+//   width: 400px;
+// }
+// =======
+// >>>>>>> 58cf54cc6b3c1dc7be7f6adf80c905f4ee4ec142
