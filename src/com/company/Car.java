@@ -9,18 +9,16 @@ public class Car {
     String model;
     int year;
     String color;
-    int userId;
 
     public Car() {
     }
 
-    public Car(int id, String make, String model, int year, String color, int userId) {
+    public Car(int id, String make, String model, int year, String color) {
         this.id = id;
         this.make = make;
         this.model = model;
         this.year = year;
         this.color = color;
-        this.userId = userId;
     }
 
     public int getId() {
@@ -43,7 +41,4 @@ public class Car {
         return color;
     }
 
-    public int getUserId() {
-        return userId;
-    }
 }

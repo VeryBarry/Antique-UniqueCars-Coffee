@@ -59,14 +59,6 @@ public class Main {
                 }
         );
 
-        Spark.post(
-                "/upload",
-                (request, response) -> {
-
-                    return null
-                }
-        );
-
         Spark.get(
                 "/images",
                 (request, response) -> {
@@ -80,49 +72,44 @@ public class Main {
         stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, username VARCHAR, password VARCHAR)");
         stmt.execute("CREATE TABLE IF NOT EXISTS cars (id IDENTITY, make VARCHAR, model VARCHAR, year INT, color VARCHAR, user_id INT)");
     }
-    public static void insertUser(Connection conn, String name, String password) throws SQLException {
+    public static void insertUser(Connection conn, String username, String password) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO users VALUES (NULL, ?, ?)");
-        stmt.setString(1, name);
+        stmt.setString(1, username);
         stmt.setString(2, password);
         stmt.execute();
     }
-    public static User selectUser(Connection conn, String name, String password) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE name = ?");
-        stmt.setString(1, name);
+    public static User selectUser(Connection conn, String username, String password) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
+        stmt.setString(1, username);
         ResultSet results = stmt.executeQuery();
-
-        //password auth
-
         if (results.next()) {
             int id = results.getInt("id");
-            return new User(id, name, password);
+            return new User(id, username, password);
         }
         return null;
     }
-    static int insertCar(Connection conn, Car car) throws SQLException {
+    static int insertCar(Connection conn, Car car, int userId) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO cars VALUES (NULL, ?, ?, ?, ?, ?)");
         stmt.setString(1, car.make);
         stmt.setString(2, car.model);
         stmt.setInt(3, car.year);
         stmt.setString(4, car.color);
+        stmt.setInt(5, userId);
         stmt.execute();
-        ResultSet results = stmt.getGeneratedKeys();
-        if (results.next()) {
-            return results.getInt(1);
-        }
-        return 0;
     }
     static ArrayList<Car> selectCars(Connection conn) throws SQLException {
-        ArrayList<Car> images = new ArrayList<>();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM cars");
+        ArrayList<Car> cars = new ArrayList<>();
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM cars INNER JOIN users ON cars.user_id = users.id");
         ResultSet results = stmt.executeQuery();
         while (results.next()) {
-            int id = results.getInt("images.id");
-            String filename = results.getString("images.filename");
-            String author = results.getString("users.name");
-            Car img = new Car(id, filename, author);
-            images.add(img);
+            int id = results.getInt("cars.id");
+            String make = results.getString("cars.make");
+            String model = results.getString("cars.model");
+            int year = results.getInt("cars.year");
+            String color = results.getString("cars.color");
+            Car c = new Car(id, make, model, year, color);
+            cars.add(c);
         }
-        return images;
+        return cars;
     }
 }
