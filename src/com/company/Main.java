@@ -94,7 +94,7 @@ public class Main {
     public static void createTables(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, username VARCHAR, password VARCHAR)");
-        stmt.execute("CREATE TABLE IF NOT EXISTS cars (id IDENTITY, make VARCHAR, model VARCHAR, year INT, color VARCHAR, user_id INT)");
+        stmt.execute("CREATE TABLE IF NOT EXISTS cars (id IDENTITY, make VARCHAR, model VARCHAR, year INT, user_id INT)");
     }
     public static void insertUser(Connection conn, String username, String password) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO users VALUES (NULL, ?, ?)");
@@ -130,7 +130,6 @@ public class Main {
             String make = results.getString("cars.make");
             String model = results.getString("cars.model");
             int year = results.getInt("cars.year");
-            String color = results.getString("cars.color");
             Car c = new Car(id, make, model, year);
             cars.add(c);
         }
