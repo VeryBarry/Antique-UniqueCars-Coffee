@@ -8,17 +8,15 @@ public class Car {
     String make;
     String model;
     int year;
-    String color;
 
     public Car() {
     }
 
-    public Car(int id, String make, String model, int year, String color) {
+    public Car(int id, String make, String model, int year) {
         this.id = id;
         this.make = make;
         this.model = model;
         this.year = year;
-        this.color = color;
     }
 
     public int getId() {
@@ -37,8 +35,5 @@ public class Car {
         return year;
     }
 
-    public String getColor() {
-        return color;
-    }
 
 }

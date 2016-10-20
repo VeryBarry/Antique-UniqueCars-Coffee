@@ -24,12 +24,12 @@ public class Main {
                     JsonParser parser = new JsonParser();
                     User user = parser.parse(body, User.class);
                     User uc = selectUser(conn, user.username);
-                    if (!user.password.equals(uc.password)) {
+                    if (uc == null) {
+                        insertUser(conn, user.username, user.password);
+                    }
+                    else if (!user.password.equals(uc.password)) {
                         Spark.halt(403);
                         return "";
-                    }
-                    else if (uc == null) {
-                        insertUser(conn, user.username, user.password);
                     }
                     Session session = request.session();
                     session.attribute("email", user.username);
@@ -42,12 +42,12 @@ public class Main {
                 (request, response) -> {
                     Session session = request.session();
                     String name = session.attribute("username");
-                    if (name == null) {
-                        return "";
+                    if (name != null) {
+                        User user = selectUser(conn, name);
+                        JsonSerializer serializer = new JsonSerializer();
+                        return serializer.serialize(user);
                     }
-                    User user = selectUser(conn, name);
-                    JsonSerializer serializer = new JsonSerializer();
-                    return serializer.serialize(user);
+                    return "";
                 }
         );
 
@@ -81,11 +81,20 @@ public class Main {
                     return serializer.serialize(selectCars(conn));
                 }
         );
+        Spark.post(
+                "/delete",
+                (request, response) -> {
+                    int id = Integer.valueOf((request.queryParams("id")));
+                    deleteCar(conn, id);
+                    response.redirect("/");
+                    return null;
+                }
+        );
     }
     public static void createTables(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, username VARCHAR, password VARCHAR)");
-        stmt.execute("CREATE TABLE IF NOT EXISTS cars (id IDENTITY, make VARCHAR, model VARCHAR, year INT, color VARCHAR, user_id INT)");
+        stmt.execute("CREATE TABLE IF NOT EXISTS cars (id IDENTITY, make VARCHAR, model VARCHAR, year INT, user_id INT)");
     }
     public static void insertUser(Connection conn, String username, String password) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO users VALUES (NULL, ?, ?)");
@@ -105,11 +114,10 @@ public class Main {
         return null;
     }
     public static void insertCar(Connection conn, Car car, int userId) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO cars VALUES (NULL, ?, ?, ?, ?, ?)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO cars VALUES (NULL, ?, ?, ?, ?)");
         stmt.setString(1, car.make);
         stmt.setString(2, car.model);
         stmt.setInt(3, car.year);
-        stmt.setString(4, car.color);
         stmt.setInt(5, userId);
         stmt.execute();
     }
@@ -122,10 +130,22 @@ public class Main {
             String make = results.getString("cars.make");
             String model = results.getString("cars.model");
             int year = results.getInt("cars.year");
-            String color = results.getString("cars.color");
-            Car c = new Car(id, make, model, year, color);
+            Car c = new Car(id, make, model, year);
             cars.add(c);
         }
         return cars;
+    }
+    public static void editCar(Connection conn, Car car, int userId) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE cars SET make = ?, model = ?, year = ? WHERE id = ?");
+        stmt.setString(1, car.make);
+        stmt.setString(2, car.model);
+        stmt.setInt(3, car.year);
+        stmt.setInt(5, userId);
+        stmt.execute();
+    }
+    public static void deleteCar(Connection conn, int id) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM cars WHERE user_Id = ?");
+        stmt.setInt(1, id);
+        stmt.execute();
     }
 }
