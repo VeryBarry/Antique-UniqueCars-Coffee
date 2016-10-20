@@ -24,12 +24,12 @@ public class Main {
                     JsonParser parser = new JsonParser();
                     User user = parser.parse(body, User.class);
                     User uc = selectUser(conn, user.username);
-                    if (!user.password.equals(uc.password)) {
+                    if (uc == null) {
+                        insertUser(conn, user.username, user.password);
+                    }
+                    else if (!user.password.equals(uc.password)) {
                         Spark.halt(403);
                         return "";
-                    }
-                    else if (uc == null) {
-                        insertUser(conn, user.username, user.password);
                     }
                     Session session = request.session();
                     session.attribute("email", user.username);
@@ -42,12 +42,12 @@ public class Main {
                 (request, response) -> {
                     Session session = request.session();
                     String name = session.attribute("username");
-                    if (name == null) {
-                        return "";
+                    if (name != null) {
+                        User user = selectUser(conn, name);
+                        JsonSerializer serializer = new JsonSerializer();
+                        return serializer.serialize(user);
                     }
-                    User user = selectUser(conn, name);
-                    JsonSerializer serializer = new JsonSerializer();
-                    return serializer.serialize(user);
+                    return "";
                 }
         );
 
@@ -94,7 +94,7 @@ public class Main {
     public static void createTables(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, username VARCHAR, password VARCHAR)");
-        stmt.execute("CREATE TABLE IF NOT EXISTS cars (id IDENTITY, make VARCHAR, model VARCHAR, year INT, color VARCHAR, user_id INT)");
+        stmt.execute("CREATE TABLE IF NOT EXISTS cars (id IDENTITY, make VARCHAR, model VARCHAR, year INT, user_id INT)");
     }
     public static void insertUser(Connection conn, String username, String password) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO users VALUES (NULL, ?, ?)");
@@ -130,7 +130,6 @@ public class Main {
             String make = results.getString("cars.make");
             String model = results.getString("cars.model");
             int year = results.getInt("cars.year");
-            String color = results.getString("cars.color");
             Car c = new Car(id, make, model, year);
             cars.add(c);
         }
