@@ -33,7 +33,7 @@ public class Main {
                     }
                     Session session = request.session();
                     session.attribute("email", user.username);
-                    return "";
+                    return "Logged In";
                 }
         );
 
@@ -57,7 +57,7 @@ public class Main {
                     Session session = request.session();
                     session.invalidate();
                     response.redirect("/");
-                    return null;
+                    return "Logged Out";
                 }
         );
 
@@ -71,7 +71,7 @@ public class Main {
                     JsonParser parser = new JsonParser();
                     Car car = parser.parse(body, Car.class);
                     insertCar(conn, car, user.id);
-                    return "";
+                    return "Car Added";
                 }
         );
         Spark.get(
@@ -87,7 +87,7 @@ public class Main {
                     int id = Integer.valueOf((request.queryParams("id")));
                     deleteCar(conn, id);
                     response.redirect("/");
-                    return null;
+                    return "Car Deleted";
                 }
         );
     }
@@ -123,15 +123,14 @@ public class Main {
     }
     public static ArrayList<Car> selectCars(Connection conn) throws SQLException {
         ArrayList<Car> cars = new ArrayList<>();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM cars INNER JOIN users ON cars.user_id = users.id");
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM cars");
         ResultSet results = stmt.executeQuery();
         while (results.next()) {
             int id = results.getInt("cars.id");
             String make = results.getString("cars.make");
             String model = results.getString("cars.model");
             int year = results.getInt("cars.year");
-            Car c = new Car(id, make, model, year);
-            cars.add(c);
+            cars.add(new Car(id, make, model, year));
         }
         return cars;
     }

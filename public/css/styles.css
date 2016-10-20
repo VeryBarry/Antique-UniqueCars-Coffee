@@ -1,30 +1,24 @@
 /*
-Error: Invalid CSS after "<<<<<<< HEAD": expected "{", was "}"
-        on line 78 of ./scss/main.scss
+Error: Invalid CSS after "  }": expected selector or at-rule, was "}"
+        on line 77 of ./scss/main.scss
 
+72: //
 73:   .car-color {
 74:         margin-bottom: 12px;
 75:   }
-76: <<<<<<< HEAD
-77: 
-78: }
-79: 
-80: .row {
-81:   padding-bottom: 60px;
-82: }
-83: 
+76: 
+77: }
+78: 
+79: .row {
+80:   padding-bottom: 60px;
+81: }
+82: 
 
 Backtrace:
-./scss/main.scss:78
+./scss/main.scss:77
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1189:in `expected'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1125:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:1120:in `tok!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:656:in `block'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:649:in `ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:675:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:668:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:125:in `stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:41:in `parse'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/scss/parser.rb:42:in `parse'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:406:in `_to_tree'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
@@ -44,4 +38,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid CSS after \"<<<<<<< HEAD\": expected \"{\", was \"}\"\A         on line 78 of ./scss/main.scss\A \A 73:   .car-color {\A 74:         margin-bottom: 12px;\A 75:   }\A 76: <<<<<<< HEAD\A 77: \A 78: }\A 79: \A 80: .row {\A 81:   padding-bottom: 60px;\A 82: }\A 83: "; }
+  content: "Error: Invalid CSS after \"  }\": expected selector or at-rule, was \"}\"\A         on line 77 of ./scss/main.scss\A \A 72: //\A 73:   .car-color {\A 74:         margin-bottom: 12px;\A 75:   }\A 76: \A 77: }\A 78: \A 79: .row {\A 80:   padding-bottom: 60px;\A 81: }\A 82: "; }
