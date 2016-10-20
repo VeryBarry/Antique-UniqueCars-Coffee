@@ -24,12 +24,12 @@ public class Main {
                     JsonParser parser = new JsonParser();
                     User user = parser.parse(body, User.class);
                     User uc = selectUser(conn, user.username);
-                    if (!user.password.equals(uc.password)) {
+                    if (uc == null) {
+                        insertUser(conn, user.username, user.password);
+                    }
+                    else if (!user.password.equals(uc.password)) {
                         Spark.halt(403);
                         return "";
-                    }
-                    else if (uc == null) {
-                        insertUser(conn, user.username, user.password);
                     }
                     Session session = request.session();
                     session.attribute("email", user.username);
@@ -42,12 +42,12 @@ public class Main {
                 (request, response) -> {
                     Session session = request.session();
                     String name = session.attribute("username");
-                    if (name == null) {
-                        return "";
+                    if (name != null) {
+                        User user = selectUser(conn, name);
+                        JsonSerializer serializer = new JsonSerializer();
+                        return serializer.serialize(user);
                     }
-                    User user = selectUser(conn, name);
-                    JsonSerializer serializer = new JsonSerializer();
-                    return serializer.serialize(user);
+                    return "";
                 }
         );
 
