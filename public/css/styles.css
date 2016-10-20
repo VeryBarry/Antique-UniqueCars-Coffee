@@ -371,33 +371,36 @@ img {
   width: 100%;
   display: block; }
 
-.jumbotron h1 {
-  text-align: center;
-  font-size: 72px;
-  font-weight: 900;
-  font-family: fantasy, serif; }
-.jumbotron h3 {
-  text-align: center;
-  font-size: 40px;
-  font-family: "Helvetica", serif; }
+#app-container {
+  width: 100%; }
 
 .main-header {
+  position: relative;
   background: #C02425;
   /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #C02425, #F0CB35);
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #C02425, #F0CB35);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  height: 400px;
+  height: 420px;
   padding-top: 50px;
   margin-bottom: 0; }
+  .main-header h1 {
+    text-align: center;
+    font-size: 72px;
+    font-weight: 900;
+    font-family: fantasy, serif; }
+  .main-header h3 {
+    text-align: center;
+    font-size: 40px;
+    font-family: "Helvetica", serif; }
 
 .container {
   margin-right: 0;
   width: 100%; }
 
 .input-container {
-  height: 325px;
+  height: 375px;
   background: #bdc3c7;
   margin-right: 0; }
 
@@ -405,6 +408,53 @@ img {
   width: 400px;
   margin: 20px auto 0; }
   .input-box h3 {
-    text-align: center; }
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 0; }
+  .input-box .name-input,
+  .input-box .screenName {
+    height: 40px; }
+
+.enter-btn {
+  text-align: center; }
+  .enter-btn a {
+    margin-top: 10px; }
+
+a:hover {
+  opacity: .5; }
+
+.firstName-input {
+  width: 100px; }
+
+.auto-pic-container {
+  position: absolute;
+  width: 150px;
+  top: 50;
+  left: 70;
+  -ms-transform: rotate(7deg);
+  /* IE 9 */
+  -webkit-transform: rotate(7deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(-15deg); }
+  .auto-pic-container img {
+    border-radius: 25px; }
+
+.truck-pic-container {
+  position: absolute;
+  width: 200px;
+  top: 125;
+  right: 70;
+  -ms-transform: rotate(7deg);
+  /* IE 9 */
+  -webkit-transform: rotate(7deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(15deg); }
+  .truck-pic-container img {
+    border-radius: 25px; }
+
+.sign-in-btn {
+  position: absolute;
+  right: 40;
+  top: 15px; }
 
 /*# sourceMappingURL=styles.css.map */
