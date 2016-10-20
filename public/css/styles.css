@@ -372,6 +372,59 @@ img {
   display: block; }
 
 .photo-container img {
-  width: 25%; }
+  width: 100%;
+  height: 27%;
+  padding-top: 3px; }
+
+.jumbotron h1 {
+  text-align: center;
+  font-size: 72px;
+  font-weight: 900;
+  font-family: 'Ultra', serif; }
+.jumbotron h3 {
+  text-align: center;
+  font-size: 40px;
+  font-family: 'Fauna One', serif; }
+
+.main-header {
+  background: #C02425;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #C02425, #F0CB35);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #C02425, #F0CB35);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 400px;
+  padding-top: 20px;
+  margin-bottom: 0; }
+
+.container {
+  margin-right: 0;
+  width: 100%; }
+
+.input-container {
+  height: 325px;
+  background: #bdc3c7;
+  margin-right: 0; }
+
+.input-box {
+  width: 400px;
+  margin: 20px auto 0; }
+  .input-box h3 {
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    margin: 18px 0; }
+  .input-box .car-color {
+    margin-bottom: 12px; }
+
+.intro > h1 {
+  font-size: 4rem;
+  font-family: 'Lobster', cursive; }
+
+.intro > p {
+  font-size: 3rem;
+  font-family: 'Fauna One', serif; }
+
+.sign-up-btn {
+  font-family: 'Lobster', cursive; }
 
 /*# sourceMappingURL=styles.css.map */
