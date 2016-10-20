@@ -416,6 +416,9 @@ img {
   .input-box .car-color {
     margin-bottom: 12px; }
 
+.row {
+  padding-bottom: 60px; }
+
 .intro > h1 {
   font-size: 4rem;
   font-family: 'Lobster', cursive; }
@@ -424,7 +427,11 @@ img {
   font-size: 3rem;
   font-family: 'Fauna One', serif; }
 
-.sign-up-btn {
+.sign-up-btn, .see-who-btn {
   font-family: 'Lobster', cursive; }
+
+.see-who-btn {
+  font-family: 'Lobster', cursive;
+  margin-top: 40px; }
 
 /*# sourceMappingURL=styles.css.map */
