@@ -81,6 +81,15 @@ public class Main {
                     return serializer.serialize(selectCars(conn));
                 }
         );
+        Spark.post(
+                "/delete",
+                (request, response) -> {
+                    int id = Integer.valueOf((request.queryParams("id")));
+                    deleteCar(conn, id);
+                    response.redirect("/");
+                    return null;
+                }
+        );
     }
     public static void createTables(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
@@ -105,11 +114,10 @@ public class Main {
         return null;
     }
     public static void insertCar(Connection conn, Car car, int userId) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO cars VALUES (NULL, ?, ?, ?, ?, ?)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO cars VALUES (NULL, ?, ?, ?, ?)");
         stmt.setString(1, car.make);
         stmt.setString(2, car.model);
         stmt.setInt(3, car.year);
-        stmt.setString(4, car.color);
         stmt.setInt(5, userId);
         stmt.execute();
     }
@@ -123,9 +131,22 @@ public class Main {
             String model = results.getString("cars.model");
             int year = results.getInt("cars.year");
             String color = results.getString("cars.color");
-            Car c = new Car(id, make, model, year, color);
+            Car c = new Car(id, make, model, year);
             cars.add(c);
         }
         return cars;
+    }
+    public static void editCar(Connection conn, Car car, int userId) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE cars SET make = ?, model = ?, year = ? WHERE id = ?");
+        stmt.setString(1, car.make);
+        stmt.setString(2, car.model);
+        stmt.setInt(3, car.year);
+        stmt.setInt(5, userId);
+        stmt.execute();
+    }
+    public static void deleteCar(Connection conn, int id) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM cars WHERE user_Id = ?");
+        stmt.setInt(1, id);
+        stmt.execute();
     }
 }
