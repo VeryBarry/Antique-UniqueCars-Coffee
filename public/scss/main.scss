@@ -10,16 +10,16 @@ img {
   width: 100%;
 }
 // <<<<<<< HEAD
-
-.photo-container img {
-      width: 100%;
-      height: 27%;
-      padding-top: 3px;
-
-}
-// =======
-// <<<<<<< HEAD
-
+//
+// .photo-container img {
+//       width: 100%;
+//       height: 27%;
+//       padding-top: 3px;
+//
+// }
+// // =======
+// // <<<<<<< HEAD
+//
 .jumbotron {
   h1 {
   text-align: center;           // I changed some of the fonts. If you don't like them we can change them back.
@@ -52,13 +52,13 @@ img {
   margin-right: 0;
   width: 100%;
 }
-
+//
 .input-container {
   height: 375px;
   background: #bdc3c7;
   margin-right: 0;
 }
-
+//
 .input-box {
   width: 400px;
   margin: 20px auto 0;
@@ -66,53 +66,56 @@ img {
     text-align: center;
     font-family: 'Lobster', cursive;
     margin: 18px 0;
+  }
 }
-
-
+//
+//
   .car-color {
         margin-bottom: 12px;
   }
-
-}
-
-
-
+//
+// }
+//
+//
+//
 .intro > h1 {
   font-size: 4rem;
   font-family: 'Lobster', cursive;
 
 }
-
+//
 .intro > p {
   // font-family: 'Josefin Sans', sans-serif;
    font-size: 3rem;
    font-family: 'Fauna One', serif;
 
 }
+//
 
 .sign-up-btn {
-
   font-family: 'Lobster', cursive;
+  margin-top: 10px;
+  margin-left: 160px;
 }
-
-.truck-pic-container {
-  position: absolute;
-  width: 200px;
-  top: 125;
-  right: 70;
-  -ms-transform: rotate(7deg); /* IE 9 */
-  -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
-  transform: rotate(15deg);
-  img {
-    border-radius: 25px;
-  }
-}
-
-.sign-in-btn {
-  position : absolute;
-  right: 40;
-  top: 15px;
-}
+//
+// .truck-pic-container {
+//   position: absolute;
+//   width: 200px;
+//   top: 125;
+//   right: 70;
+//   -ms-transform: rotate(7deg); /* IE 9 */
+//   -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+//   transform: rotate(15deg);
+//   img {
+//     border-radius: 25px;
+//   }
+// }
+//
+// .sign-up-btn {
+//   position : absolute;
+//   right: 40;
+//   top: 15px;
+// }
 
 // .pswd-input {
 //   width: 50%;
