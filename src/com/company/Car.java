@@ -12,6 +12,12 @@ public class Car {
     public Car() {
     }
 
+    public Car(String make, String model, int year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
     public Car(int id, String make, String model, int year) {
         this.id = id;
         this.make = make;

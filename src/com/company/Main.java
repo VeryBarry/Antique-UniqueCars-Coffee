@@ -118,7 +118,7 @@ public class Main {
         stmt.setString(1, car.make);
         stmt.setString(2, car.model);
         stmt.setInt(3, car.year);
-        stmt.setInt(5, userId);
+        stmt.setInt(4, userId);
         stmt.execute();
     }
     public static ArrayList<Car> selectCars(Connection conn) throws SQLException {
@@ -130,7 +130,8 @@ public class Main {
             String make = results.getString("cars.make");
             String model = results.getString("cars.model");
             int year = results.getInt("cars.year");
-            cars.add(new Car(id, make, model, year));
+            Car c = new Car(id, make, model, year);
+            cars.add(c);
         }
         return cars;
     }
