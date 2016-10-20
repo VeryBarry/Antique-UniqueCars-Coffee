@@ -84,7 +84,7 @@ public class Main {
         Spark.post(
                 "/delete",
                 (request, response) -> {
-                    int id = Integer.valueOf((request.queryParams("id")));
+                    int id = Integer.valueOf(request.queryParams("id"));
                     deleteCar(conn, id);
                     response.redirect("/");
                     return "Car Deleted";
