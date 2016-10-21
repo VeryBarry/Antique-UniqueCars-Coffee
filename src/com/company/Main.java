@@ -64,9 +64,9 @@ public class Main {
         Spark.post(
                 "/add-car",
                 (request, response) -> {
-                    Session session = request.session();
-                    String email = session.attribute("email");
-                    User user = selectUser(conn, email);
+//                    Session session = request.session();
+//                    String email = session.attribute("email");
+//                    User user = selectUser(conn, email);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Car car = parser.parse(body, Car.class);
