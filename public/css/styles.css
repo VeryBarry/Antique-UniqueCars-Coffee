@@ -374,6 +374,11 @@ img {
 #app-container {
   width: 100%; }
 
+.photo-container img {
+  width: 100%;
+  height: 27%;
+  padding-top: 3px; }
+
 .jumbotron h1 {
   text-align: center;
   font-size: 72px;
@@ -416,6 +421,9 @@ img {
 .car-color {
   margin-bottom: 12px; }
 
+.row {
+  padding-bottom: 60px; }
+
 .intro > h1 {
   font-size: 4rem;
   font-family: 'Lobster', cursive; }
@@ -426,7 +434,6 @@ img {
 
 .sign-up-btn {
   font-family: 'Lobster', cursive;
-  margin-top: 10px;
-  margin-left: 160px; }
+  margin-top: 10px; }
 
 /*# sourceMappingURL=styles.css.map */
