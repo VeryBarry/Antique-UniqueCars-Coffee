@@ -33,7 +33,7 @@ public class Main {
                     }
                     Session session = request.session();
                     session.attribute("email", user.username);
-                    return "Logged In";
+                    return "";
                 }
         );
 
@@ -57,21 +57,21 @@ public class Main {
                     Session session = request.session();
                     session.invalidate();
                     response.redirect("/");
-                    return "Logged Out";
+                    return "";
                 }
         );
 
         Spark.post(
                 "/add-car",
                 (request, response) -> {
-                    Session session = request.session();
-                    String email = session.attribute("email");
-                    User user = selectUser(conn, email);
+//                    Session session = request.session();
+//                    String email = session.attribute("email");
+//                    User user = selectUser(conn, email);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Car car = parser.parse(body, Car.class);
-                    insertCar(conn, car, user.id);
-                    return "Car Added";
+                    insertCar(conn, car, 0);
+                    return "";
                 }
         );
         Spark.get(
@@ -84,10 +84,10 @@ public class Main {
         Spark.post(
                 "/delete",
                 (request, response) -> {
-                    int id = Integer.valueOf((request.queryParams("id")));
+                    int id = Integer.valueOf(request.queryParams("id"));
                     deleteCar(conn, id);
                     response.redirect("/");
-                    return "Car Deleted";
+                    return "";
                 }
         );
     }
@@ -118,7 +118,7 @@ public class Main {
         stmt.setString(1, car.make);
         stmt.setString(2, car.model);
         stmt.setInt(3, car.year);
-        stmt.setInt(5, userId);
+        stmt.setInt(4, 0);
         stmt.execute();
     }
     public static ArrayList<Car> selectCars(Connection conn) throws SQLException {
@@ -130,7 +130,8 @@ public class Main {
             String make = results.getString("cars.make");
             String model = results.getString("cars.model");
             int year = results.getInt("cars.year");
-            cars.add(new Car(id, make, model, year));
+            Car c = new Car(id, make, model, year);
+            cars.add(c);
         }
         return cars;
     }
