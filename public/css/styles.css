@@ -436,4 +436,15 @@ img {
   font-family: 'Lobster', cursive;
   margin-top: 10px; }
 
+.cars-attending {
+  width: 100%; }
+
+.car-tab > tr {
+  line-height: 1.8em;
+  font-family: 'Fauna One', serif; }
+
+th {
+  text-align: center;
+  font-family: 'Lobster', cursive; }
+
 /*# sourceMappingURL=styles.css.map */

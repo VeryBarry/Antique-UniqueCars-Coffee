@@ -30,8 +30,10 @@ var routerController = function(){
          showAuthPage();
          break;
       case "listing":
+      
         $.getJSON(BACKEND_URL + "/car").then(function(serverRes){
-          listingPage();
+
+          listingPage(serverRes);
           console.log(serverRes)
           document.querySelector('#app-container').innerHTML
 
