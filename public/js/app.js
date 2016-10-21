@@ -28,10 +28,17 @@ var routerController = function(){
     switch(currentHashPrefix){
 
       case "listing":
+
         $.getJSON(BACKEND_URL + "/car").then(function(serverRes){
-          showListingPage(serverRes)
+
+          showListingPage(serverRes);
+          console.log(serverRes)
+          document.querySelector('#app-container').innerHTML  
+      })
+
+          // showListingPage(serverRes)
           // console.log("serRes", serverRes)
-        })
+        // })
         break;
     }
 }
