@@ -400,9 +400,10 @@ img {
   width: 100%; }
 
 .input-container {
-  height: 375px;
+  height: 325px;
   background: #bdc3c7;
-  margin-right: 0; }
+  margin-right: 0;
+  margin-bottom: 10px; }
 
 .input-box {
   width: 400px;
