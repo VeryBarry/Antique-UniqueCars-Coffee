@@ -33,7 +33,7 @@ public class Main {
                     }
                     Session session = request.session();
                     session.attribute("email", user.username);
-                    return "Logged In";
+                    return "";
                 }
         );
 
@@ -57,7 +57,7 @@ public class Main {
                     Session session = request.session();
                     session.invalidate();
                     response.redirect("/");
-                    return "Logged Out";
+                    return "";
                 }
         );
 
@@ -70,8 +70,8 @@ public class Main {
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Car car = parser.parse(body, Car.class);
-                    insertCar(conn, car, user.id);
-                    return "Car Added";
+                    insertCar(conn, car, 0);
+                    return "";
                 }
         );
         Spark.get(
@@ -87,7 +87,7 @@ public class Main {
                     int id = Integer.valueOf(request.queryParams("id"));
                     deleteCar(conn, id);
                     response.redirect("/");
-                    return "Car Deleted";
+                    return "";
                 }
         );
     }
@@ -118,7 +118,7 @@ public class Main {
         stmt.setString(1, car.make);
         stmt.setString(2, car.model);
         stmt.setInt(3, car.year);
-        stmt.setInt(4, userId);
+        stmt.setInt(4, 0);
         stmt.execute();
     }
     public static ArrayList<Car> selectCars(Connection conn) throws SQLException {
