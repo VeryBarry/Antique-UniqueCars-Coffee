@@ -31,7 +31,8 @@ var routerController = function(){
          break;
       case "listing":
         $.getJSON(BACKEND_URL + "/car").then(function(serverRes){
-          console.log(serverRes)
+          listingPage()
+          console.log("serRes", serverRes)
           document.querySelector('#app-container').innerHTML = '<h2>hello</h2>'
 
       })
