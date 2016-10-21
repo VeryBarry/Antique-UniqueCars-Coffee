@@ -2,8 +2,8 @@
 // console.log($)
 // console.log(_)
 // console.log(Backbone)
-var BACKEND_URL = "https://quik-spitter-api.herokuapp.com/api"
-// var BACKEND_URL = ""
+//var BACKEND_URL = "https://quik-spitter-api.herokuapp.com/api"
+ var BACKEND_URL = ""
 
 //
 var routerController = function(){

@@ -33,7 +33,7 @@ public class Main {
                     }
                     Session session = request.session();
                     session.attribute("email", user.username);
-                    return "";
+                    return "Logged in";
                 }
         );
 
@@ -47,7 +47,7 @@ public class Main {
                         JsonSerializer serializer = new JsonSerializer();
                         return serializer.serialize(user);
                     }
-                    return "";
+                    return "User not found";
                 }
         );
 
@@ -57,7 +57,7 @@ public class Main {
                     Session session = request.session();
                     session.invalidate();
                     response.redirect("/");
-                    return "";
+                    return "Logged out";
                 }
         );
 
@@ -71,7 +71,7 @@ public class Main {
                     JsonParser parser = new JsonParser();
                     Car car = parser.parse(body, Car.class);
                     insertCar(conn, car, 0);
-                    return "";
+                    return "Car added";
                 }
         );
         Spark.get(
@@ -87,7 +87,7 @@ public class Main {
                     int id = Integer.valueOf(request.queryParams("id"));
                     deleteCar(conn, id);
                     response.redirect("/");
-                    return "";
+                    return "Car deleted";
                 }
         );
     }
