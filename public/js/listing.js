@@ -4,7 +4,7 @@ var forEach = function(arr, cb){
   }
 }
 
-var listingPage =  function(carList){
+var showListingPage =  function(carList){
 
   var bigStr = ''
   bigStr += '<div class="jumbotron main-header">'
@@ -18,18 +18,22 @@ var listingPage =  function(carList){
   bigStr += '<th>  Year </th>'
   bigStr += '</tr>'
   bigStr += '<tbody class="car-tab">'
+  bigStr += '<tbody>'
 
-  forEach(carList, function(serverRes){
+  forEach(carList,function(serverRes){
     bigStr += '<tr>'
     bigStr +=  '<td>'+ serverRes.make + '</td>'
     bigStr +=  '<td>' + serverRes.model + '</td>'
     bigStr +=  '<td>'+ serverRes.year + '</td>'
     bigStr += '</tr>'
-})
+  })
+
   bigStr += '</tbody>'
   bigStr += '</table>'
 
 // })
 document.querySelector('#app-container').innerHTML = bigStr
+  bigStr += '</div>'
+
 
   }
