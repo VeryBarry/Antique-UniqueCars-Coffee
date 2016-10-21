@@ -3,7 +3,7 @@
 // console.log(_)
 // console.log(Backbone)
 // var BACKEND_URL = "https://quik-spitter-api.herokuapp.com/api"
-var BACKEND_URL = "localhost:8082"
+var BACKEND_URL = "localhost:4567"
 
 //
 var routerController = function(){
@@ -33,7 +33,7 @@ var routerController = function(){
 
           showListingPage(serverRes);
           console.log(serverRes)
-          document.querySelector('#app-container').innerHTML  
+          document.querySelector('#app-container').innerHTML
       })
 
           // showListingPage(serverRes)
