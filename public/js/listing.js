@@ -8,7 +8,8 @@ var showListingPage =  function(carList){
 
   var bigStr = ''
   bigStr += '<div class="jumbotron main-header">'
-  bigStr += '<h1>Antique and Unique<br/>Cars and Coffee</h1>'
+  bigStr += '<div class"col-sm-12><h1>Antique & Unique<br/>Cars & Coffee</h1>'
+  bigStr += '</div>'
   bigStr += '</div>'
   bigStr += '<table class="cars-attending text-center">'
   bigStr += '<thead class="text-center">'
@@ -18,7 +19,6 @@ var showListingPage =  function(carList){
   bigStr += '<th>  Year </th>'
   bigStr += '</tr>'
   bigStr += '<tbody class="car-tab">'
-  bigStr += '<tbody>'
 
   forEach(carList,function(serverRes){
     bigStr += '<tr>'

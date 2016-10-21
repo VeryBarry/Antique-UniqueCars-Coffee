@@ -2,7 +2,7 @@
 var showHomePage = function() {
   bigStr = ''
   bigStr +=   '<div class="jumbotron main-header">'
-  bigStr +=     '<h1><span style="font-size:90px">Antique and Unique</span><br/>Cars and Coffee</h1>'
+  bigStr +=     '<h1><span style="font-size:90px">Antique & Unique</span class="cc"><br/>Cars & Coffee</h1>'
   bigStr +=     '<h3>The place where Jalopies and Java come together!</h3>'
   bigStr +=   '</div>' //<!-- End jumbotron -->
   bigStr +=     '<div class="col-xs-12 col-sm-6">'
