@@ -57,20 +57,20 @@ public class Main {
                     Session session = request.session();
                     session.invalidate();
                     response.redirect("/");
-                    return null;
+                    return "";
                 }
         );
 
         Spark.post(
                 "/add-car",
                 (request, response) -> {
-                    Session session = request.session();
-                    String email = session.attribute("email");
-                    User user = selectUser(conn, email);
+//                    Session session = request.session();
+//                    String email = session.attribute("email");
+//                    User user = selectUser(conn, email);
                     String body = request.body();
                     JsonParser parser = new JsonParser();
                     Car car = parser.parse(body, Car.class);
-                    insertCar(conn, car, user.id);
+                    insertCar(conn, car, 0);
                     return "";
                 }
         );
@@ -84,10 +84,10 @@ public class Main {
         Spark.post(
                 "/delete",
                 (request, response) -> {
-                    int id = Integer.valueOf((request.queryParams("id")));
+                    int id = Integer.valueOf(request.queryParams("id"));
                     deleteCar(conn, id);
                     response.redirect("/");
-                    return null;
+                    return "";
                 }
         );
     }
@@ -118,12 +118,12 @@ public class Main {
         stmt.setString(1, car.make);
         stmt.setString(2, car.model);
         stmt.setInt(3, car.year);
-        stmt.setInt(5, userId);
+        stmt.setInt(4, 0);
         stmt.execute();
     }
     public static ArrayList<Car> selectCars(Connection conn) throws SQLException {
         ArrayList<Car> cars = new ArrayList<>();
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM cars INNER JOIN users ON cars.user_id = users.id");
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM cars");
         ResultSet results = stmt.executeQuery();
         while (results.next()) {
             int id = results.getInt("cars.id");
