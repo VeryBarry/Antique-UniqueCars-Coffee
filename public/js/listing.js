@@ -18,7 +18,6 @@ var showListingPage =  function(carList){
   bigStr += '<th>  Year </th>'
   bigStr += '</tr>'
   bigStr += '<tbody class="car-tab">'
-  bigStr += '<tbody>'
 
   forEach(carList,function(serverRes){
     bigStr += '<tr>'
