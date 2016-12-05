@@ -9,6 +9,7 @@ var showHomePage = function() {
   bigStr +=       '<div class="intro text-center">'
   bigStr +=         '<h1>Have a vintage car? </h1>'
   bigStr +=         '<p> Bring it to the next Cars & Coffee meet up this Saturday at The Lava Java from 8-10a.m.  </p>'
+  bigStr +=         '<a href="#listing"><button class="btn btn-primary">who\'s coming</button></a>'
   bigStr +=       '</div>'
   bigStr +=     '</div>'
   bigStr += '<div class="container text-center">'
