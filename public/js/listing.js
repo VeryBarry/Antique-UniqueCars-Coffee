@@ -10,6 +10,7 @@ var showListingPage =  function(carList){
   bigStr += '<div class="jumbotron main-header">'
   bigStr +=   '<h1>Antique & Unique<br/>Cars & Coffee</h1>'
   bigStr +=   '<h2 class="showEntrants">Entrants to the up-coming show!!</h2>'
+  bigStr +=   '<button class="btn btn-primary home-btn">Home</button>'
   bigStr += '</div>'
   bigStr += '<table class="cars-attending text-center">'
   bigStr += '<thead class="text-center">'
@@ -35,5 +36,6 @@ var showListingPage =  function(carList){
   document.querySelector('#app-container').innerHTML = bigStr
   bigStr += '</div>'
 
-
+  document.querySelector('.home-btn')
+  window.addEventListener('click', showHomePage)
   }
